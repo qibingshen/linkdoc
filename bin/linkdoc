@@ -1,0 +1,25 @@
+#!/usr/bin/env node
+
+const program = require('commander');
+const inquirer = require('inquirer');
+const ejs = require('ejs');
+const path = require('path');
+const mkdirp = require('mkdirp');
+
+const TEMPLATE_DIR = path.join(__dirname, '..', 'templates');
+
+
+
+program
+    .name('linkdoc')
+    .version('1.0.0')
+    .usage('[options] [dir]')
+    .option('-p, --peppers', 'Add peppers');
+
+program
+    .command('*')
+    .action(() => {
+        console.log(program.args.shift());
+    })
+
+program.parse(process.argv);

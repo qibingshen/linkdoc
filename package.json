@@ -1,0 +1,20 @@
+{
+  "name": "linkdoc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "bin": {
+    "linkdoc": "./bin/linkdoc"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "commander": "^2.16.0",
+    "ejs": "^2.6.1",
+    "inquirer": "^6.0.0",
+    "mkdirp": "^0.5.1"
+  }
+}
