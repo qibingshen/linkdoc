@@ -5,6 +5,10 @@ const inquirer = require('inquirer');
 const ejs = require('ejs');
 const path = require('path');
 const mkdirp = require('mkdirp');
+const fs = require('fs');
+const minimatch = require('minimatch');
+
+const fsHelper = require('../lib/fsHelper');
 
 const TEMPLATE_DIR = path.join(__dirname, '..', 'templates');
 
@@ -14,12 +18,77 @@ program
     .name('linkdoc')
     .version('1.0.0')
     .usage('[options] [dir]')
-    .option('-p, --peppers', 'Add peppers');
+    .option('-i, --initial', 'initial')
+    .option('-c, --component', 'add component')
+    .option('-s, --service', 'add service')
+    .option('-p, --page', 'add page')
+    .option('-e, --style', 'add style');
+
+program
+    .command('ng <name>')
+    .description('ng')
+    .action((name) => {
+        const app = readtep('angular', name);
+        console.log(app);
+        mkdirtep(app, name);
+    });
+
+program
+    .command('angular')
+    .description('angular')
+    .action(() => {
+        // console.log(TEMPLATE_DIR);
+    });
 
 program
     .command('*')
+    .description('run created')
     .action(() => {
-        console.log(program.args.shift());
-    })
+        console.log(fs.readdirSync(process.cwd()));
+        // console.log(program.args.shift());
+    });
 
 program.parse(process.argv);
+
+function copyTemplateMulti(fromDir, toDir, nameGlob) {
+    fs.readdirSync(path.join(TEMPLATE_DIR, fromDir))
+        .filter(minimatch.filter(nameGlob, {matchBase: true}))
+        .forEach(name => {
+
+        })
+}
+
+function copyTemplate(fromDir, toDir) {
+    fsHelper.write(toDir, fs.readFileSync(path.join(TEMPLATE_DIR, fromDir), 'uft-8'));
+}
+
+function mkdirtep(app, name) {
+    const cwd = process.cwd();
+    fsHelper.mkdir(cwd, `/${name}`);
+    const appKeys = Object.keys(app);
+    appKeys.forEach(key => {
+        fsHelper.mkdir(cwd, `/${name}/${key}s`)
+        fsHelper.write(`${cwd}/${name}/${key}s/\$${name}.${key}.js`, app[key]);
+    });
+
+}
+
+function readtep(type, name) {
+    const app = Object.create(null);
+    if (program.component) {
+        const component = fsHelper.loadTemplate(`${type}/component.js`);
+        component.locals.name = name;
+        app.component = component.render();
+    }
+    if (program.service) {
+        const service = fsHelper.loadTemplate(`${type}/$service.js`);
+        service.locals.name = name;
+        app.service = service.render();
+    }
+    if (program.style) {
+        const style = fsHelper.loadTemplate(`${type}/style.scss`);
+        style.locals.name = name;
+        app.style = style.render();
+    }
+    return app
+}

@@ -1,0 +1,15 @@
+class <%= name %>Controller {
+    constructor() {
+        'ngInject';
+    }
+}
+
+export default class <%= name %> {
+    controller = <%= name %>Controller;
+
+    template = `
+        <div>
+            test
+        </div>
+    `
+}
