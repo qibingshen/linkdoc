@@ -1,11 +1,11 @@
-class testController {
+class chelongController {
     constructor() {
         'ngInject';
     }
 }
 
-export default class test {
-    controller = testController;
+export default class chelong {
+    controller = chelongController;
 
     template = `
         <div>

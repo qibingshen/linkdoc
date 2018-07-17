@@ -9,9 +9,9 @@ const fs = require('fs');
 const minimatch = require('minimatch');
 
 const fsHelper = require('../lib/fsHelper');
+const createName = require('../lib/createName');
 
 const TEMPLATE_DIR = path.join(__dirname, '..', 'templates');
-
 
 
 program
@@ -44,23 +44,11 @@ program
     .command('*')
     .description('run created')
     .action(() => {
-        console.log(fs.readdirSync(process.cwd()));
-        // console.log(program.args.shift());
+        // console.log(fs.readdirSync(process.cwd()));
     });
 
 program.parse(process.argv);
 
-function copyTemplateMulti(fromDir, toDir, nameGlob) {
-    fs.readdirSync(path.join(TEMPLATE_DIR, fromDir))
-        .filter(minimatch.filter(nameGlob, {matchBase: true}))
-        .forEach(name => {
-
-        })
-}
-
-function copyTemplate(fromDir, toDir) {
-    fsHelper.write(toDir, fs.readFileSync(path.join(TEMPLATE_DIR, fromDir), 'uft-8'));
-}
 
 function mkdirtep(app, name) {
     const cwd = process.cwd();

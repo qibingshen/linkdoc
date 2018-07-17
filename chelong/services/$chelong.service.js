@@ -1,6 +1,6 @@
 export const ngModules = ['ngMaterial'];
 
-export default class $test {
+export default class $chelong {
   constructor() {
     'ngInject';
   }

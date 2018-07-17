@@ -1,0 +1,27 @@
+{
+    "suffix": {
+        "component": ".js",
+        "service": ".js",
+        "style": ".scss",
+        "package": ".json"
+    },
+    "prefix": {
+        "service": "$"
+    },
+    "buildconf": {
+        "page": [
+            "component",
+            "service",
+            "style"
+        ],
+        "component": [ "component" ],
+        "service": [ "service" ],
+        "style": [ "style" ]
+    },
+    "options": [
+        "component",
+        "service",
+        "style",
+        "page"
+    ]
+}
