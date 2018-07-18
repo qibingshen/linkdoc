@@ -22,6 +22,7 @@ program
     .option('-c, --component', 'add component')
     .option('-s, --service', 'add service')
     .option('-p, --page', 'add page')
+    .option('-m, --module', 'add module')
     .option('-e, --style', 'add style');
 
 program
@@ -44,6 +45,7 @@ program
     .command('*')
     .description('run created')
     .action(() => {
+        console.log(createName.render(program, 'xxx'));
         // console.log(fs.readdirSync(process.cwd()));
     });
 

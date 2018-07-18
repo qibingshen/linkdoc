@@ -14,13 +14,11 @@
     "prefix": {
         "service": "$"
     },
-    "levelDir": {
-        "template": "template/",
-        "demoExample": "demos/",
-        "component": "components/",
-        "service": "services/",
-        "style": "styles/"
+    "parent-dir": {
+        "template": "template",
+        "demoExample": "demos"
     },
+    
     "buildconf": {
         "page": [
             "component",
@@ -41,6 +39,37 @@
         "component": [ "component" ],
         "service": [ "service" ],
         "style": [ "style" ]
+    },
+
+
+    "component": {
+        "suffix": ".component.js"
+    },
+    "service": {
+        "suffix": ".service.js",
+        "prefix": "$"
+    },
+    "style": {
+        "suffix": ".scss"
+    },
+    "module": {
+        "depends": [
+            "component",
+            "service",
+            "service"
+        ]
+    },
+    "page": {
+        "leavl-dir": "index",
+        "depends": [
+            "common",
+            "demos",
+            "template",
+            "project",
+            "module",
+            "entry",
+            "config"
+        ]
     },
     "options": [
         "component",
