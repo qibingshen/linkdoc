@@ -15,11 +15,11 @@
         "service": "$"
     },
     "levelDir": {
-        "template": "template/",
-        "demoExample": "demos/",
-        "component": "components/",
-        "service": "services/",
-        "style": "styles/"
+        "template": "template",
+        "demoExample": "demos",
+        "component": "components",
+        "service": "services",
+        "style": "styles"
     },
     "buildconf": {
         "page": [

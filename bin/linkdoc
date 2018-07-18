@@ -9,7 +9,7 @@ const fs = require('fs');
 const minimatch = require('minimatch');
 
 const fsHelper = require('../lib/fsHelper');
-const createName = require('../lib/createName');
+const tepHelper = require('../lib/tepHelper');
 
 const TEMPLATE_DIR = path.join(__dirname, '..', 'templates');
 
@@ -22,16 +22,14 @@ program
     .option('-c, --component', 'add component')
     .option('-s, --service', 'add service')
     .option('-p, --page', 'add page')
-    .option('-m, --module', 'add module')
     .option('-e, --style', 'add style');
 
 program
     .command('ng <name>')
     .description('ng')
     .action((name) => {
-        const app = readtep('angular', name);
-        console.log(app);
-        mkdirtep(app, name);
+        const app = tepHelper.readtep('angular', program, name);
+        tepHelper.mkdirtep(app, name);
     });
 
 program
@@ -45,8 +43,8 @@ program
     .command('*')
     .description('run created')
     .action(() => {
-        console.log(createName.render(program, 'xxx'));
         // console.log(fs.readdirSync(process.cwd()));
+        // const ss = fs.readFileSync( path.join(__dirname, '..', 'configure.json'), 'utf-8')
     });
 
 program.parse(process.argv);
